@@ -15,13 +15,22 @@ Berisi setup infrastruktur, workflow n8n, webapp, serta dokumentasi progres.
 | 6 | `ngrok-running.png` | Terminal menunjukkan Ngrok berjalan dan menampilkan URL publik. |
 | 7 | `vscode-installed.png` *(opsional)* | Tampilan aplikasi VSCode — bukti VSCode terinstal. |
 
-## Struktur Folder
-- workflows/ : berisi file workflow (.json)
-- docs/ : berisi dokumentasi dan laporan (.pdf / .png)
-- screenshots/ : berisi screenshot bukti progress
+📁 **Lihat seluruh screenshot:**  
+👉 [screenshots/](screenshots/)
 
-## Progress Status
-- [ ] Progress 1 — Setup Dasar  
+---
+
+## 📁 Struktur Folder
+
+- **workflows/** — berisi file workflow (.json)  
+- **docs/** — berisi dokumentasi dan laporan (.pdf / .png)  
+- **screenshots/** — berisi screenshot bukti progress  
+
+---
+
+## ✔ Progress Status
+
+- [x] **Progress 1 — Setup Dasar**  
 - [ ] Progress 2 — Workflow Telegram  
 - [ ] Progress 3 — WebApp  
 - [ ] Progress 4 — Embedding & Pinecone  
