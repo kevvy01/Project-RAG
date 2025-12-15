@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Desktop Interface</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="card initial-view" id="mainCard">
+        
+        <div class="header">
+            <div class="status-dot"></div>
+            AI Assistant
+            <button class="reset-btn" onclick="hapusHistory()" title="Reset Chat">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                    <path d="M3 3v5h5"></path>
+                </svg>
+            </button>
+        </div>
+        
+        <div id="welcomeText">Hello!</div>
+
+        <div id="chatHistory">
+            </div>
+
+        <div class="input-area">
+            <input type="text" id="userInput" placeholder="Ask anything..." autocomplete="off">
+            <button type="button" onclick="kirimPesan()">➤</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
