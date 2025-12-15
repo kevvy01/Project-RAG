@@ -1,0 +1,107 @@
+{
+  "name": "progress-3",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chat",
+        "responseMode": "responseNode",
+        "options": {
+          "allowedOrigins": "*"
+        }
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "a68ccf9b-3794-4df6-95fa-68f75199d60b",
+      "name": "Webhook",
+      "webhookId": "c1a62a0a-e9f7-400d-a31e-4be906714d60"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-robotics-er-1.5-preview",
+          "mode": "list",
+          "cachedResultName": "models/gemini-robotics-er-1.5-preview"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ $json.body.message }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "6828e034-9282-4a82-ba03-eeda1b22d689",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "1X9MME57wG4dzmuR",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"reply\": $json.content.parts[0].text } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        560,
+        0
+      ],
+      "id": "acc0027b-06ac-4bb8-9a8c-a307bf74ab4e",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "5799037d-f1eb-43d4-8678-47f214e1b79e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0e3017cc8b233b41930cd364566b3a02d060049a218f025ca2ca92b97ff5f775"
+  },
+  "id": "B4bQ7aqg1oQQtJ1j",
+  "tags": []
+}

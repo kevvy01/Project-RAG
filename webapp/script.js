@@ -29,7 +29,7 @@ async function kirimPesan() {
     renderBubble(txt, 'user', true);
     inputField.value = ''; 
 
-    const loadingId = renderBubble("Sedang berpikir...", 'bot', false, true);
+    const loadingId = renderBubble("Thinking...", 'bot', false, true);
 
     try {
         const response = await fetch(WEBHOOK_URL, {
