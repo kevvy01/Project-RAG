@@ -1,6 +1,6 @@
 # Project RAG
 
-Repositori untuk project Retrieval Augmented Generation (RAG).  
+Repositori untuk project Retrieval Augmented Generation (RAG).
 Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumentasi progres pengembangan.
 
 ---
@@ -9,14 +9,25 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 
 - [x] **Progress 1 — Setup Infrastruktur Dasar**
 - [x] **Progress 2 — Workflow Telegram Chatbot (Basic LLM)**
-- [ ] Progress 3 — WebApp
-- [ ] Progress 4 — Embedding & Pinecone  
-- [ ] Progress 5 — Integrasi  
-- [ ] Progress 6 — Cloudflare  
+- [x] **Progress 3 — WebApp Chatbot (Local & Vercel)**
+- [ ] Progress 4 — Embedding & Pinecone
+- [ ] Progress 5 — Integrasi
+- [ ] Progress 6 — Cloudflare
 
 ---
 
 ## 📸 Bukti & Dokumentasi
+
+### Progress 3: WebApp Chatbot & Deployment
+*Implementasi antarmuka web sederhana (HTML/CSS/JS) yang terhubung ke n8n melalui Webhook dan di-deploy menggunakan Vercel.*
+
+| No | Screenshot | Deskripsi |
+| --- | --- | --- |
+| 1 | `webapp-chat-success.png` | Bukti WebApp berhasil mengirim pesan dan menerima balasan dari AI. |
+| 2 | `vercel-deployment.png` | Tampilan WebApp saat diakses melalui domain publik Vercel. |
+| 3 | `n8n-webhook-workflow.png` | Workflow n8n (Webhook Trigger → Gemini → Webhook Response). |
+
+> **Catatan Teknis:** Frontend dibangun menggunakan Vanilla JS dan di-hosting di Vercel. Backend logika berjalan di n8n lokal yang diekspos menggunakan **Ngrok**.
 
 ### Progress 2: Workflow Telegram & Gemini AI
 *Implementasi chatbot Telegram yang terhubung dengan Google Gemini API melalui n8n.*
@@ -50,12 +61,19 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 ```text
 RAG-Project/
 │
-├── workflows/        # Berisi file workflow n8n (.json)
-│   └── progress2_telegram_gemini.json
+├── webapp/                   # Frontend WebApp (Progress 3)
+│   ├── image/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
 │
-├── docs/             # Dokumentasi dan laporan (.pdf / .docx)
+├── workflows/                # Berisi file workflow n8n (.json)
+│   ├── progress-2_telegram.json
+│   └── progress-3_webapp.json
 │
-├── screenshots/      # Bukti screenshot progress (png/jpg)
+├── docs/                     # Dokumentasi dan laporan (.pdf / .docx)
 │
-├── docker-compose.yaml  # Konfigurasi infrastruktur n8n
-└── README.md         # File ini
+├── screenshots/              # Bukti screenshot progress (png/jpg)
+│
+├── docker-compose.yaml       # Konfigurasi infrastruktur n8n
+└── README.md                 # File ini
