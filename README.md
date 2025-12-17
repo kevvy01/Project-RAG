@@ -10,13 +10,24 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 - [x] **Progress 1 — Setup Infrastruktur Dasar**
 - [x] **Progress 2 — Workflow Telegram Chatbot (Basic LLM)**
 - [x] **Progress 3 — WebApp Chatbot (Local & Vercel)**
-- [ ] Progress 4 — Embedding & Pinecone
+- [x] **Progress 4 — Embedding & Pinecone**
 - [ ] Progress 5 — Integrasi
 - [ ] Progress 6 — Cloudflare
 
 ---
 
 ## 📸 Bukti & Dokumentasi
+
+### Progress 4: Embedding & Pinecone (RAG Ingestion)
+*Implementasi pipeline untuk membaca dokumen (PDF), mengubahnya menjadi vector (Embedding), dan menyimpannya ke database Pinecone.*
+
+| No | Screenshot | Deskripsi |
+| --- | --- | --- |
+| 1 | `pinecone-dashboard.png` | **Bukti Utama:** Dashboard Pinecone menunjukkan *Record Count* bertambah (data berhasil masuk). |
+| 2 | `n8n-embedding-output.png` | Output node Gemini di n8n yang menampilkan data teks telah diubah menjadi array vektor. |
+| 3 | `n8n-rag-ingestion-workflow.png` | Workflow penuh: Google Drive → Text Splitter → Gemini Embedding → Pinecone. |
+
+> **Catatan Teknis:** Menggunakan **Google Gemini Embedding** (`models/embedding-001`) untuk konversi teks ke vektor 768 dimensi, dan **Pinecone** sebagai Vector Database. Dokumen sumber diambil otomatis dari Google Drive.
 
 ### Progress 3: WebApp Chatbot & Deployment
 *Implementasi antarmuka web sederhana (HTML/CSS/JS) yang terhubung ke n8n melalui Webhook dan di-deploy menggunakan Vercel.*
@@ -69,7 +80,8 @@ RAG-Project/
 │
 ├── workflows/                # Berisi file workflow n8n (.json)
 │   ├── progress-2_telegram.json
-│   └── progress-3_webapp.json
+│   ├── progress-3_webapp.json
+│   └── progress-4_embedding.json
 │
 ├── docs/                     # Dokumentasi dan laporan (.pdf / .docx)
 │
