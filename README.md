@@ -79,9 +79,9 @@ RAG-Project/
 │   └── script.js
 │
 ├── workflows/                # Berisi file workflow n8n (.json)
-│   ├── progress-2_telegram.json
-│   ├── progress-3_webapp.json
-│   └── progress-4_embedding.json
+│   ├── progress-2-telegram.json
+│   ├── progress-3-webapp.json
+│   └── progress-4-embedding.json
 │
 ├── docs/                     # Dokumentasi dan laporan (.pdf / .docx)
 │
