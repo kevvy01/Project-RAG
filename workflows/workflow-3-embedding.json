@@ -1,5 +1,5 @@
 {
-  "name": "progress-4",
+  "name": "workflow-3-embedding",
   "nodes": [
     {
       "parameters": {},
@@ -14,11 +14,71 @@
     },
     {
       "parameters": {
+        "mode": "insert",
+        "pineconeIndex": {
+          "__rl": true,
+          "value": "rag-project",
+          "mode": "list",
+          "cachedResultName": "rag-project"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
+      "typeVersion": 1.3,
+      "position": [
+        432,
+        0
+      ],
+      "id": "6ea6ed47-f66c-49b9-b493-5d311e169899",
+      "name": "Pinecone Vector Store",
+      "credentials": {
+        "pineconeApi": {
+          "id": "32xcahP3y5L3LGfe",
+          "name": "PineconeApi account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "dataType": "binary",
+        "textSplittingMode": "custom",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
+      "typeVersion": 1.1,
+      "position": [
+        576,
+        192
+      ],
+      "id": "b0439d04-c1d6-4088-804d-684c3ca11e59",
+      "name": "Default Data Loader"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        432,
+        192
+      ],
+      "id": "b5b306ff-81f9-4c3d-9221-fae9d9914305",
+      "name": "Embeddings Google Gemini",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "1X9MME57wG4dzmuR",
+          "name": "Google Gemini(PaLM) Api account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
         "operation": "download",
         "fileId": {
           "__rl": true,
-          "value": "1K6mUMb0DVAHBCUjPQaqXbaN8WuNh4PKY",
-          "mode": "id"
+          "value": "1s1zMsjxvhpw-gyDyJzSrmDFrTWZ1e6du",
+          "mode": "list",
+          "cachedResultName": "P1-Dunia Berbantuan Komunikasi Digital.pdf",
+          "cachedResultUrl": "https://drive.google.com/file/d/1s1zMsjxvhpw-gyDyJzSrmDFrTWZ1e6du/view?usp=drivesdk"
         },
         "options": {}
       },
@@ -39,60 +99,17 @@
     },
     {
       "parameters": {
-        "mode": "insert",
-        "pineconeIndex": {
-          "__rl": true,
-          "value": "rag-project",
-          "mode": "list",
-          "cachedResultName": "rag-project"
-        },
+        "chunkOverlap": 200,
         "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
-      "typeVersion": 1.3,
-      "position": [
-        512,
-        0
-      ],
-      "id": "6ea6ed47-f66c-49b9-b493-5d311e169899",
-      "name": "Pinecone Vector Store",
-      "credentials": {
-        "pineconeApi": {
-          "id": "32xcahP3y5L3LGfe",
-          "name": "PineconeApi account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "dataType": "binary",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
-      "typeVersion": 1.1,
-      "position": [
-        672,
-        192
-      ],
-      "id": "b0439d04-c1d6-4088-804d-684c3ca11e59",
-      "name": "Default Data Loader"
-    },
-    {
-      "parameters": {},
-      "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
       "typeVersion": 1,
       "position": [
-        512,
-        192
+        656,
+        352
       ],
-      "id": "b5b306ff-81f9-4c3d-9221-fae9d9914305",
-      "name": "Embeddings Google Gemini",
-      "credentials": {
-        "googlePalmApi": {
-          "id": "1X9MME57wG4dzmuR",
-          "name": "Google Gemini(PaLM) Api account 2"
-        }
-      }
+      "id": "953614e8-964d-4b42-a9e5-44e40859f768",
+      "name": "Recursive Character Text Splitter"
     }
   ],
   "pinData": {},
@@ -140,13 +157,24 @@
           }
         ]
       ]
+    },
+    "Recursive Character Text Splitter": {
+      "ai_textSplitter": [
+        [
+          {
+            "node": "Default Data Loader",
+            "type": "ai_textSplitter",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "f63ecc6e-11b4-4308-a912-7d373c2cec37",
+  "versionId": "ac37e0d0-ef2a-4fcb-9dab-c387b942092c",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "0e3017cc8b233b41930cd364566b3a02d060049a218f025ca2ca92b97ff5f775"

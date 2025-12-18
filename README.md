@@ -23,8 +23,10 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 
 | No | Screenshot | Deskripsi |
 | --- | --- | --- |
-| 1 | `rag-chat-success.png` | Bukti chatbot Telegram menjawab pertanyaan berdasarkan isi dokumen PDF. |
-| 2 | `n8n-integration-workflow.png` | Workflow final n8n (Telegram -> Q&A Chain -> Pinecone & Gemini). |
+| 1 | `telegram-integration-chat-success.png` | Bukti chatbot Telegram menjawab pertanyaan berdasarkan isi dokumen PDF. |
+| 2 | `webapp-integration-chat-success` | Bukti WebApp menjawab pertanyaan berdasarkan isi dokumen PDF. |
+| 3 | `n8n-telegram-integration-workflow.png` | Workflow final n8n (Telegram -> Q&A Chain -> Pinecone & Gemini). |
+| 4 | `n8n-webapp-integration-workflow.png` | Workflow final n8n (WebApp -> Q&A Chain -> Pinecone & Gemini). |
 
 > **Catatan Teknis:** Menggunakan `Question and Answer Chain` untuk menggabungkan konteks dari Pinecone ke dalam prompt model Gemini secara otomatis.
 
@@ -89,10 +91,11 @@ RAG-Project/
 │   └── script.js
 │
 ├── workflows/                # Berisi file workflow n8n (.json)
-│   ├── progress-2-telegram.json
-│   ├── progress-3-webapp.json
-│   └── progress-4-embedding.json
-│   └── progress-5-integration.json
+│   ├── workflow-1-telegram.json
+│   ├── workflow-2-webapp.json
+│   ├── workflow-3-embedding.json
+│   │── workflow-4-integration-telegram.json
+│   └── workflow-4-integration-webapp.json
 │
 ├── docs/                     # Dokumentasi dan laporan (.pdf / .docx)
 │

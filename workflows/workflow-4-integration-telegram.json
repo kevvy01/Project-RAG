@@ -1,5 +1,5 @@
 {
-  "name": "progress-5",
+  "name": "workflow-4-integration-telegram",
   "nodes": [
     {
       "parameters": {
@@ -209,7 +209,7 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "038341f2-588f-4c0f-b2d5-6d7707bd496f",
+  "versionId": "77a74e76-854a-4a33-be12-305ea09a4e3c",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "0e3017cc8b233b41930cd364566b3a02d060049a218f025ca2ca92b97ff5f775"
