@@ -11,12 +11,22 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 - [x] **Progress 2 — Workflow Telegram Chatbot (Basic LLM)**
 - [x] **Progress 3 — WebApp Chatbot (Local & Vercel)**
 - [x] **Progress 4 — Embedding & Pinecone**
-- [ ] Progress 5 — Integrasi
+- [x] **Progress 5 — Integrasi**
 - [ ] Progress 6 — Cloudflare
 
 ---
 
 ## 📸 Bukti & Dokumentasi
+
+### Progress 5: Integrasi Total (RAG Chatbot)
+*Menghubungkan Telegram Chatbot dengan database Pinecone sehingga AI menjawab berdasarkan dokumen referensi.*
+
+| No | Screenshot | Deskripsi |
+| --- | --- | --- |
+| 1 | `rag-chat-success.png` | Bukti chatbot Telegram menjawab pertanyaan berdasarkan isi dokumen PDF. |
+| 2 | `n8n-integration-workflow.png` | Workflow final n8n (Telegram -> Q&A Chain -> Pinecone & Gemini). |
+
+> **Catatan Teknis:** Menggunakan `Question and Answer Chain` untuk menggabungkan konteks dari Pinecone ke dalam prompt model Gemini secara otomatis.
 
 ### Progress 4: Embedding & Pinecone (RAG Ingestion)
 *Implementasi pipeline untuk membaca dokumen (PDF), mengubahnya menjadi vector (Embedding), dan menyimpannya ke database Pinecone.*
@@ -82,6 +92,7 @@ RAG-Project/
 │   ├── progress-2-telegram.json
 │   ├── progress-3-webapp.json
 │   └── progress-4-embedding.json
+│   └── progress-5-integration.json
 │
 ├── docs/                     # Dokumentasi dan laporan (.pdf / .docx)
 │
