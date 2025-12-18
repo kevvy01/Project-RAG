@@ -59,7 +59,7 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 | 2 | `n8n-workflow-full.png` | Tampilan full workflow di n8n (Telegram Trigger → Gemini → Telegram Output). |
 | 3 | `gemini-node-config.png` | (Opsional) Konfigurasi node Google Gemini di n8n. |
 
-> **Catatan Teknis:** Menggunakan model **Google Gemini Pro** sebagai alternatif OpenAI untuk pemrosesan bahasa (LLM) dikarenakan efisiensi dan ketersediaan akses API.
+> **Catatan Teknis:** Menggunakan model **Google Gemini** sebagai alternatif OpenAI untuk pemrosesan bahasa (LLM) dikarenakan efisiensi dan ketersediaan akses API.
 
 ### Progress 1: Setup Infrastruktur Dasar
 *Instalasi tools wajib: Docker, Node.js, Git, n8n.*
