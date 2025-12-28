@@ -45,7 +45,7 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 
 | No | Screenshot | Deskripsi |
 | --- | --- | --- |
-| 1 | `p3-n8n-webhook-workflow.png` | Workflow n8n (Webhook Trigger → Gemini → Webhook Response). |
+| 1 | `p3-n8n-webhook-workflow.png` | Workflow n8n (Webhook Trigger → Open AI → Webhook Response). |
 | 2 | `p3-vercel-deployment.png` | Tampilan WebApp saat diakses melalui domain publik Vercel. |
 | 3 | `p3-webapp-chat-success.png` | Bukti WebApp berhasil mengirim pesan dan menerima balasan dari AI. |
 > **Catatan Teknis:** Frontend dibangun menggunakan Vanilla JS dan di-hosting di Vercel. Backend logika berjalan di n8n lokal yang diekspos menggunakan **Ngrok**.
@@ -55,7 +55,7 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 
 | No | Screenshot | Deskripsi |
 | --- | --- | --- |
-| 1 | `p2-n8n-workflow-full.png` | Tampilan full workflow di n8n (Telegram Trigger → Groq → Telegram Output). |
+| 1 | `p2-n8n-workflow-full.png` | Tampilan full workflow di n8n (Telegram Trigger → Open AI → Telegram Output). |
 | 2 | `p2-telegram-chat-success.png` | Bukti chatbot berhasil membalas pertanyaan di Telegram. |
 
 > **Catatan Teknis:** Menggunakan model **Groq** sebagai alternatif OpenAI untuk pemrosesan bahasa (LLM) dikarenakan efisiensi dan ketersediaan akses API.
