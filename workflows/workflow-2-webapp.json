@@ -1,5 +1,5 @@
 {
-  "name": "progress-3",
+  "name": "workflow-2-webapp",
   "nodes": [
     {
       "parameters": {
@@ -16,56 +16,59 @@
         0,
         0
       ],
-      "id": "a68ccf9b-3794-4df6-95fa-68f75199d60b",
+      "id": "f05784b4-99f9-4a24-9977-8719ea35fdd8",
       "name": "Webhook",
-      "webhookId": "c1a62a0a-e9f7-400d-a31e-4be906714d60"
+      "webhookId": "5049d799-68d0-4f5c-99a2-c5531a2c038e"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"reply\": $json.output[0].content[0].text } }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.4,
+      "position": [
+        576,
+        0
+      ],
+      "id": "40174674-b268-42d9-9dcf-a18b766db0c4",
+      "name": "Respond to Webhook"
     },
     {
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "models/gemini-robotics-er-1.5-preview",
+          "value": "llama-3.1-8b-instant",
           "mode": "list",
-          "cachedResultName": "models/gemini-robotics-er-1.5-preview"
+          "cachedResultName": "LLAMA-3.1-8B-INSTANT"
         },
-        "messages": {
+        "responses": {
           "values": [
             {
               "content": "={{ $json.body.message }}"
             }
           ]
         },
-        "options": {}
+        "builtInTools": {},
+        "options": {
+          "store": false
+        }
       },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
       "position": [
         208,
         0
       ],
-      "id": "6828e034-9282-4a82-ba03-eeda1b22d689",
-      "name": "Message a model",
+      "id": "29de8cd7-e094-4c99-b884-ea71751402a4",
+      "name": "Message a model1",
       "credentials": {
-        "googlePalmApi": {
-          "id": "1X9MME57wG4dzmuR",
-          "name": "Google Gemini(PaLM) Api account 2"
+        "openAiApi": {
+          "id": "GzCpIDApf8IOLeJh",
+          "name": "groq"
         }
       }
-    },
-    {
-      "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ { \"reply\": $json.content.parts[0].text } }}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.4,
-      "position": [
-        560,
-        0
-      ],
-      "id": "acc0027b-06ac-4bb8-9a8c-a307bf74ab4e",
-      "name": "Respond to Webhook"
     }
   ],
   "pinData": {},
@@ -74,14 +77,14 @@
       "main": [
         [
           {
-            "node": "Message a model",
+            "node": "Message a model1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Message a model": {
+    "Message a model1": {
       "main": [
         [
           {
@@ -93,15 +96,15 @@
       ]
     }
   },
-  "active": true,
+  "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "5799037d-f1eb-43d4-8678-47f214e1b79e",
+  "versionId": "5fd46632-70f1-44de-a1fa-4999ef9525d3",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "0e3017cc8b233b41930cd364566b3a02d060049a218f025ca2ca92b97ff5f775"
   },
-  "id": "B4bQ7aqg1oQQtJ1j",
+  "id": "sAsaBHgWqf4CRPhg",
   "tags": []
 }

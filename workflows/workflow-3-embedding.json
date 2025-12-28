@@ -26,7 +26,7 @@
       "type": "@n8n/n8n-nodes-langchain.vectorStorePinecone",
       "typeVersion": 1.3,
       "position": [
-        432,
+        640,
         0
       ],
       "id": "6ea6ed47-f66c-49b9-b493-5d311e169899",
@@ -47,7 +47,7 @@
       "type": "@n8n/n8n-nodes-langchain.documentDefaultDataLoader",
       "typeVersion": 1.1,
       "position": [
-        576,
+        784,
         192
       ],
       "id": "b0439d04-c1d6-4088-804d-684c3ca11e59",
@@ -58,7 +58,7 @@
       "type": "@n8n/n8n-nodes-langchain.embeddingsGoogleGemini",
       "typeVersion": 1,
       "position": [
-        432,
+        640,
         192
       ],
       "id": "b5b306ff-81f9-4c3d-9221-fae9d9914305",
@@ -72,13 +72,30 @@
     },
     {
       "parameters": {
-        "operation": "download",
-        "fileId": {
-          "__rl": true,
-          "value": "1s1zMsjxvhpw-gyDyJzSrmDFrTWZ1e6du",
-          "mode": "list",
-          "cachedResultName": "P1-Dunia Berbantuan Komunikasi Digital.pdf",
-          "cachedResultUrl": "https://drive.google.com/file/d/1s1zMsjxvhpw-gyDyJzSrmDFrTWZ1e6du/view?usp=drivesdk"
+        "chunkOverlap": 200,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
+      "typeVersion": 1,
+      "position": [
+        864,
+        352
+      ],
+      "id": "953614e8-964d-4b42-a9e5-44e40859f768",
+      "name": "Recursive Character Text Splitter"
+    },
+    {
+      "parameters": {
+        "resource": "fileFolder",
+        "returnAll": true,
+        "filter": {
+          "folderId": {
+            "__rl": true,
+            "value": "12AcJCKjCcSZr3i2CJfvZHv_LyrhVUreS",
+            "mode": "list",
+            "cachedResultName": "project-rag",
+            "cachedResultUrl": "https://drive.google.com/drive/folders/12AcJCKjCcSZr3i2CJfvZHv_LyrhVUreS"
+          }
         },
         "options": {}
       },
@@ -86,6 +103,31 @@
       "typeVersion": 3,
       "position": [
         208,
+        0
+      ],
+      "id": "cb23d262-9b7c-428a-b266-1cc443e43d9e",
+      "name": "Search files and folders",
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "z8qHOKSaXQR2kDft",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        416,
         0
       ],
       "id": "174afab6-f9d5-4784-8eb1-072110912d14",
@@ -96,20 +138,6 @@
           "name": "Google Drive account"
         }
       }
-    },
-    {
-      "parameters": {
-        "chunkOverlap": 200,
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.textSplitterRecursiveCharacterTextSplitter",
-      "typeVersion": 1,
-      "position": [
-        656,
-        352
-      ],
-      "id": "953614e8-964d-4b42-a9e5-44e40859f768",
-      "name": "Recursive Character Text Splitter"
     }
   ],
   "pinData": {},
@@ -118,7 +146,7 @@
       "main": [
         [
           {
-            "node": "Download file",
+            "node": "Search files and folders",
             "type": "main",
             "index": 0
           }
@@ -147,17 +175,6 @@
         ]
       ]
     },
-    "Download file": {
-      "main": [
-        [
-          {
-            "node": "Pinecone Vector Store",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Recursive Character Text Splitter": {
       "ai_textSplitter": [
         [
@@ -168,13 +185,35 @@
           }
         ]
       ]
+    },
+    "Search files and folders": {
+      "main": [
+        [
+          {
+            "node": "Download file",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download file": {
+      "main": [
+        [
+          {
+            "node": "Pinecone Vector Store",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "active": false,
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "ac37e0d0-ef2a-4fcb-9dab-c387b942092c",
+  "versionId": "da12b779-b0fd-49b6-a98c-9c364bccf439",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "0e3017cc8b233b41930cd364566b3a02d060049a218f025ca2ca92b97ff5f775"

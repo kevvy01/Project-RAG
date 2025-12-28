@@ -23,57 +23,55 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 
 | No | Screenshot | Deskripsi |
 | --- | --- | --- |
-| 1 | `telegram-integration-chat-success.png` | Bukti chatbot Telegram menjawab pertanyaan berdasarkan isi dokumen PDF. |
-| 2 | `webapp-integration-chat-success` | Bukti WebApp menjawab pertanyaan berdasarkan isi dokumen PDF. |
-| 3 | `n8n-telegram-integration-workflow.png` | Workflow final n8n (Telegram -> Q&A Chain -> Pinecone & Gemini). |
-| 4 | `n8n-webapp-integration-workflow.png` | Workflow final n8n (WebApp -> Q&A Chain -> Pinecone & Gemini). |
+| 1 | `p5-n8n--integration-workflow.png` | Workflow final n8n (Telegram/webapp -> Q&A Chain -> Pinecone & Groq). |
+| 2 | `p5-telegram-integration-chat-success.png` | Bukti chatbot Telegram menjawab pertanyaan berdasarkan isi dokumen PDF. |
+| 3 | `p5-webapp-integration-chat-success` | Bukti WebApp menjawab pertanyaan berdasarkan isi dokumen PDF. |
 
-> **Catatan Teknis:** Menggunakan `Question and Answer Chain` untuk menggabungkan konteks dari Pinecone ke dalam prompt model Gemini secara otomatis.
+> **Catatan Teknis:** Menggunakan `Question and Answer Chain` untuk menggabungkan konteks dari Pinecone ke dalam prompt model Groq secara otomatis.
 
 ### Progress 4: Embedding & Pinecone (RAG Ingestion)
 *Implementasi pipeline untuk membaca dokumen (PDF), mengubahnya menjadi vector (Embedding), dan menyimpannya ke database Pinecone.*
 
 | No | Screenshot | Deskripsi |
 | --- | --- | --- |
-| 1 | `pinecone-dashboard.png` | **Bukti Utama:** Dashboard Pinecone menunjukkan *Record Count* bertambah (data berhasil masuk). |
-| 2 | `n8n-embedding-output.png` | Output node Gemini di n8n yang menampilkan data teks telah diubah menjadi array vektor. |
-| 3 | `n8n-rag-ingestion-workflow.png` | Workflow penuh: Google Drive → Text Splitter → Gemini Embedding → Pinecone. |
+| 1 | `p4-n8n-embedding-output.png` | Output node Gemini di n8n yang menampilkan data teks telah diubah menjadi array vektor. |
+| 2 | `p4-n8n-rag-ingestion-workflow.png` | Workflow penuh: Google Drive → Text Splitter → Gemini Embedding → Pinecone. |
+| 3 | `p4-pinecone-dashboard.png` | **Bukti Utama:** Dashboard Pinecone menunjukkan *Record Count* bertambah (data berhasil masuk). |
 
-> **Catatan Teknis:** Menggunakan **Google Gemini Embedding** (`models/embedding-001`) untuk konversi teks ke vektor 768 dimensi, dan **Pinecone** sebagai Vector Database. Dokumen sumber diambil otomatis dari Google Drive.
+> **Catatan Teknis:** Menggunakan **Google Gemini Embedding** (`models/embedding-004`) untuk konversi teks ke vektor 768 dimensi, dan **Pinecone** sebagai Vector Database. Dokumen sumber diambil otomatis dari Google Drive.
 
 ### Progress 3: WebApp Chatbot & Deployment
 *Implementasi antarmuka web sederhana (HTML/CSS/JS) yang terhubung ke n8n melalui Webhook dan di-deploy menggunakan Vercel.*
 
 | No | Screenshot | Deskripsi |
 | --- | --- | --- |
-| 1 | `webapp-chat-success.png` | Bukti WebApp berhasil mengirim pesan dan menerima balasan dari AI. |
-| 2 | `vercel-deployment.png` | Tampilan WebApp saat diakses melalui domain publik Vercel. |
-| 3 | `n8n-webhook-workflow.png` | Workflow n8n (Webhook Trigger → Gemini → Webhook Response). |
-
+| 1 | `p3-n8n-webhook-workflow.png` | Workflow n8n (Webhook Trigger → Gemini → Webhook Response). |
+| 2 | `p3-vercel-deployment.png` | Tampilan WebApp saat diakses melalui domain publik Vercel. |
+| 3 | `p3-webapp-chat-success.png` | Bukti WebApp berhasil mengirim pesan dan menerima balasan dari AI. |
 > **Catatan Teknis:** Frontend dibangun menggunakan Vanilla JS dan di-hosting di Vercel. Backend logika berjalan di n8n lokal yang diekspos menggunakan **Ngrok**.
 
-### Progress 2: Workflow Telegram & Gemini AI
-*Implementasi chatbot Telegram yang terhubung dengan Google Gemini API melalui n8n.*
+### Progress 2: Workflow Telegram & Groq AI
+*Implementasi chatbot Telegram yang terhubung dengan Groq API melalui n8n.*
 
 | No | Screenshot | Deskripsi |
 | --- | --- | --- |
-| 1 | `telegram-chat-success.png` | Bukti chatbot berhasil membalas pertanyaan di Telegram. |
-| 2 | `n8n-workflow-full.png` | Tampilan full workflow di n8n (Telegram Trigger → Gemini → Telegram Output). |
-| 3 | `gemini-node-config.png` | (Opsional) Konfigurasi node Google Gemini di n8n. |
+| 1 | `p2-n8n-workflow-full.png` | Tampilan full workflow di n8n (Telegram Trigger → Groq → Telegram Output). |
+| 2 | `p2-telegram-chat-success.png` | Bukti chatbot berhasil membalas pertanyaan di Telegram. |
 
-> **Catatan Teknis:** Menggunakan model **Google Gemini** sebagai alternatif OpenAI untuk pemrosesan bahasa (LLM) dikarenakan efisiensi dan ketersediaan akses API.
+> **Catatan Teknis:** Menggunakan model **Groq** sebagai alternatif OpenAI untuk pemrosesan bahasa (LLM) dikarenakan efisiensi dan ketersediaan akses API.
 
 ### Progress 1: Setup Infrastruktur Dasar
 *Instalasi tools wajib: Docker, Node.js, Git, n8n.*
 
 | No | Screenshot | Deskripsi |
 | --- | --- | --- |
-| 1 | `docker-installed.png` | Bukti perintah `docker --version` berhasil — Docker terinstal. |
-| 2 | `docker-compose-installed.png` | Bukti `docker compose version` berhasil — Docker Compose aktif. |
-| 3 | `node-installed.png` | Bukti `node -v` & `npm -v` — Node.js & npm terinstal. |
-| 4 | `git-installed.png` | Bukti `git --version` — Git terinstal. |
-| 5 | `n8n-running.png` | Tampilan terminal atau browser menunjukkan n8n sedang berjalan. |
-| 6 | `ngrok-running.png` | Terminal menunjukkan Ngrok berjalan dan menampilkan URL publik. |
+| 1 | `p1-docker-compose-installed.png` | Bukti `docker compose version` berhasil — Docker Compose aktif. |
+| 2 | `p1-docker-installed.png` | Bukti perintah `docker --version` berhasil — Docker terinstal. |
+| 3 | `p1-git-installed.png` | Bukti `git --version` — Git terinstal. |
+| 4 | `p1-n8n-running.png` | Tampilan terminal atau browser menunjukkan n8n sedang berjalan. |
+| 5 | `p1-ngrok-running.png` | Terminal menunjukkan Ngrok berjalan dan menampilkan URL publik. |
+| 6 | `p1-node-installed.png` | Bukti `node -v` & `npm -v` — Node.js & npm terinstal. |
+| 7 | `p1-vscode-installed.png` | Terminal menunjukkan Ngrok berjalan dan menampilkan URL publik. |
 
 📁 **Lihat seluruh screenshot:** 👉 [screenshots/](screenshots/)
 
@@ -94,8 +92,7 @@ RAG-Project/
 │   ├── workflow-1-telegram.json
 │   ├── workflow-2-webapp.json
 │   ├── workflow-3-embedding.json
-│   │── workflow-4-integration-telegram.json
-│   └── workflow-4-integration-webapp.json
+│   └── workflow-4-integration.json
 │
 ├── docs/                     # Dokumentasi dan laporan (.pdf / .docx)
 │

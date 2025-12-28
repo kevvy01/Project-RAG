@@ -1,5 +1,5 @@
 {
-  "name": "progress-2",
+  "name": "workflow-1-telegram",
   "nodes": [
     {
       "parameters": {
@@ -14,9 +14,9 @@
         0,
         0
       ],
-      "id": "d7598752-16be-428a-9d40-a66dee057b69",
+      "id": "4af65132-28a4-45ad-b6d9-798285de490f",
       "name": "Telegram Trigger",
-      "webhookId": "363cb079-c003-4392-80da-72b2bf1486fb",
+      "webhookId": "43fd976f-232d-4985-bdf3-d9dcf1afd038",
       "credentials": {
         "telegramApi": {
           "id": "52YRCPfHBb0kld4l",
@@ -27,7 +27,7 @@
     {
       "parameters": {
         "chatId": "={{ $('Telegram Trigger').item.json.message.chat.id }}",
-        "text": "={{ $json.content.parts[0].text }}",
+        "text": "={{ $json.output[0].content[0].text }}",
         "additionalFields": {
           "appendAttribution": false
         }
@@ -35,12 +35,12 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        768,
+        640,
         0
       ],
-      "id": "d8c80f16-260c-4816-b7aa-0f351931e37f",
+      "id": "5a495e11-40df-4f76-853f-047b077cf8ed",
       "name": "Send a text message",
-      "webhookId": "75139f1b-b514-449b-9cc1-ebb69ff2e3b1",
+      "webhookId": "0afec23e-f17c-4a97-9629-59a5e6e98111",
       "credentials": {
         "telegramApi": {
           "id": "52YRCPfHBb0kld4l",
@@ -52,31 +52,34 @@
       "parameters": {
         "modelId": {
           "__rl": true,
-          "value": "models/gemini-2.5-flash",
+          "value": "llama-3.1-8b-instant",
           "mode": "list",
-          "cachedResultName": "models/gemini-2.5-flash"
+          "cachedResultName": "LLAMA-3.1-8B-INSTANT"
         },
-        "messages": {
+        "responses": {
           "values": [
             {
               "content": "={{ $json.message.text }}"
             }
           ]
         },
-        "options": {}
+        "builtInTools": {},
+        "options": {
+          "store": false
+        }
       },
-      "type": "@n8n/n8n-nodes-langchain.googleGemini",
-      "typeVersion": 1,
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
       "position": [
         208,
         0
       ],
-      "id": "98b3d450-32bf-47a6-85fc-c6a8d39f0b40",
-      "name": "Message a model",
+      "id": "5b10dcb4-c3e4-46e4-be71-c40e80bed001",
+      "name": "Message a model1",
       "credentials": {
-        "googlePalmApi": {
-          "id": "SM7N88EQV6XHbFYL",
-          "name": "Google Gemini(PaLM) Api account"
+        "openAiApi": {
+          "id": "GzCpIDApf8IOLeJh",
+          "name": "groq"
         }
       }
     }
@@ -87,14 +90,14 @@
       "main": [
         [
           {
-            "node": "Message a model",
+            "node": "Message a model1",
             "type": "main",
             "index": 0
           }
         ]
       ]
     },
-    "Message a model": {
+    "Message a model1": {
       "main": [
         [
           {
@@ -110,11 +113,11 @@
   "settings": {
     "executionOrder": "v1"
   },
-  "versionId": "c27010a6-e578-43a9-a5c5-759c855d1c6e",
+  "versionId": "2c0f1935-06a4-43f4-b6de-f439d811e6ea",
   "meta": {
     "templateCredsSetupCompleted": true,
     "instanceId": "0e3017cc8b233b41930cd364566b3a02d060049a218f025ca2ca92b97ff5f775"
   },
-  "id": "2BQ9ZO6Na8k2YCGn",
+  "id": "l6x8CvbSB1HYpGke",
   "tags": []
 }
