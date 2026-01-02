@@ -8,28 +8,74 @@
 </head>
 <body>
 
-    <div class="card initial-view" id="mainCard">
+    <div class="card" id="mainLayout">
         
-        <div class="header">
-            <div class="status-dot"></div>
-            Kevvy
-            <button class="reset-btn" onclick="hapusHistory()" title="Reset Chat">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
-                    <path d="M3 3v5h5"></path>
-                </svg>
-            </button>
-        </div>
-        
-        <div id="welcomeText">Hello!</div>
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <button class="icon-btn" onclick="toggleSidebar()" title="Close Sidebar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M9 3v18"/></svg>
+                </button>
+                
+                <span class="sidebar-title-text">History</span>
+                
+                <button class="new-chat-btn" onclick="startNewChat()" title="New Chat">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+                </button>
+            </div>
+            
+            <div id="historyList">
+                </div>
 
-        <div id="chatHistory">
+            <div class="sidebar-footer">
+                <button onclick="hapusSemuaData()" class="clear-all-btn">Clear All Data</button>
+            </div>
+        </div>
+
+        <div class="main-chat-area initial-view" id="chatContainer">
+            
+            <div class="header">
+                <div class="header-left">
+                    <button class="icon-btn" id="openSidebarBtn" onclick="toggleSidebar()" title="Open Sidebar" style="display: none;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                    </button>
+
+                    <div class="status-dot"></div>
+                    <span id="headerTitle">New Chat</span>
+                </div>
+            </div>
+            
+            <div id="welcomeText">Hello!</div>
+
+            <div id="chatHistory"></div>
+
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="Ask anything..." autocomplete="off">
+                <button type="button" onclick="kirimPesan()">➤</button>
             </div>
 
-        <div class="input-area">
-            <input type="text" id="userInput" placeholder="Ask anything..." autocomplete="off">
-            <button type="button" onclick="kirimPesan()">➤</button>
         </div>
+    </div>
+
+    <div id="modalOverlay" class="modal-overlay">
+        
+        <div id="modalRename" class="modal-box" style="display: none;">
+            <h3>Rename Chat</h3>
+            <input type="text" id="renameInput" placeholder="Enter new name..." autocomplete="off">
+            <div class="modal-buttons">
+                <button onclick="closeModal()" class="btn-cancel">Cancel</button>
+                <button onclick="confirmRename()" class="btn-save">Save</button>
+            </div>
+        </div>
+
+        <div id="modalConfirm" class="modal-box" style="display: none;">
+            <h3 id="confirmTitle">Delete Chat?</h3>
+            <p id="confirmMessage">Are you sure you want to delete this history?</p>
+            <div class="modal-buttons">
+                <button onclick="closeModal()" class="btn-cancel">Cancel</button>
+                <button id="btnConfirmDelete" class="btn-delete-confirm">Delete</button>
+            </div>
+        </div>
+
     </div>
 
     <script src="script.js"></script>
