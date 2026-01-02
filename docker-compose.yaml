@@ -9,6 +9,6 @@ services:
       - ~/.n8n:/home/node/.n8n
     environment:
       - TZ=Asia/Jakarta
-      - N8N_HOST=unethical-tamica-prefriendly.ngrok-free.dev
+      - N8N_HOST=n8n.kevvy.my.id
       - N8N_PROTOCOL=https
-      - WEBHOOK_URL=https://unethical-tamica-prefriendly.ngrok-free.dev/
+      - WEBHOOK_URL=https://n8n.kevvy.my.id/
