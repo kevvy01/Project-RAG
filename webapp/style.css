@@ -245,3 +245,21 @@ body::after {
 .btn-save:hover { background-color: #43a047; }
 .btn-delete-confirm { background-color: #d32f2f; color: white; }
 .btn-delete-confirm:hover { background-color: #b71c1c; }
+
+/* --- Tampilan Khusus Mobile (HP) --- */
+@media screen and (max-width: 600px) {
+    
+    /* Agar kotak chat memenuhi layar HP */
+    .chat-container {
+        width: 100%;
+        height: 100vh; /* Tinggi 100% layar */
+        border-radius: 0; /* Hilangkan lengkungan sudut */
+        margin: 0;
+    }
+
+    /* Agar tombol dan input lebih besar (enak dipencet jempol) */
+    input[type="text"], button {
+        padding: 15px;
+        font-size: 16px;
+    }
+}

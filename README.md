@@ -12,7 +12,7 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 - [x] **Progress 3 — WebApp Chatbot (Local & Vercel)**
 - [x] **Progress 4 — Embedding & Pinecone**
 - [x] **Progress 5 — Integrasi**
-- [ ] Progress 6 — Cloudflare
+- [x] **Progress 6 — Cloudflare**
 
 ---
 
@@ -82,7 +82,7 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 ```text
 RAG-Project/
 │
-├── webapp/                   # Frontend WebApp (Progress 3)
+├── webapp/                   # Frontend WebApp
 │   ├── image/
 │   ├── index.html
 │   ├── style.css
