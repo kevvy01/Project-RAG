@@ -12,11 +12,26 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 - [x] **Progress 3 — WebApp Chatbot (Local & Vercel)**
 - [x] **Progress 4 — Embedding & Pinecone**
 - [x] **Progress 5 — Integrasi**
-- [x] **Progress 6 — Cloudflare**
+- [x] **Progress 6 — Cloudflare & Security**
 
 ---
 
 ## 📸 Bukti & Dokumentasi
+
+### Progress 6: Cloudflare Tunnel & Network Security
+*Migrasi infrastruktur dari Ngrok ke Cloudflare Tunnel (Zero Trust) untuk stabilitas koneksi, penggunaan domain kustom, serta peningkatan keamanan dengan Firewall (WAF).*
+
+| No | Screenshot | Deskripsi |
+| --- | --- | --- |
+| 1 | `p6-cloudflare-tunnel-healthy.png` | Dashboard Cloudflare Zero Trust menunjukkan Tunnel dalam status **Healthy** (Connected). |
+| 2 | `p6-cloudflare-waf-rules.png` | Konfigurasi Web Application Firewall (WAF) memblokir request selain GET, POST, & OPTIONS. |
+| 3 | `p6-dns-setup.png` | Pengaturan DNS Record untuk subdomain n8n dan WebApp (Vercel). |
+| 4 | `p6-webapp-mobile-responsive.png` | Tampilan WebApp yang kini responsif dan rapi saat diakses melalui perangkat mobile. |
+
+> **Catatan Teknis:**
+> * **Infrastructure:** Menggantikan Ngrok dengan **Cloudflare Tunnel (`cloudflared`)** agar n8n dapat diakses publik tanpa membuka port router, menggunakan domain sendiri (`.my.id`).
+> * **Security:** Mengaktifkan **WAF** untuk mencegah serangan pada webhook dan mengizinkan metode `OPTIONS` untuk menangani CORS.
+> * **Frontend:** Update CSS (Media Queries) untuk mendukung tampilan responsif penuh pada layar smartphone.
 
 ### Progress 5: Integrasi Total (RAG Chatbot)
 *Menghubungkan Telegram Chatbot dengan database Pinecone sehingga AI menjawab berdasarkan dokumen referensi.*
@@ -48,7 +63,8 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 | 1 | `p3-n8n-webhook-workflow.png` | Workflow n8n (Webhook Trigger → Open AI → Webhook Response). |
 | 2 | `p3-vercel-deployment.png` | Tampilan WebApp saat diakses melalui domain publik Vercel. |
 | 3 | `p3-webapp-chat-success.png` | Bukti WebApp berhasil mengirim pesan dan menerima balasan dari AI. |
-> **Catatan Teknis:** Frontend dibangun menggunakan Vanilla JS dan di-hosting di Vercel. Backend logika berjalan di n8n lokal yang diekspos menggunakan **Ngrok**.
+
+> **Catatan Teknis:** Frontend dibangun menggunakan Vanilla JS dan di-hosting di Vercel. Backend logika berjalan di n8n lokal yang diekspos menggunakan Cloudflare Tunnel (sebelumnya Ngrok).
 
 ### Progress 2: Workflow Telegram & Groq AI
 *Implementasi chatbot Telegram yang terhubung dengan Groq API melalui n8n.*
@@ -71,7 +87,7 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 | 4 | `p1-n8n-running.png` | Tampilan terminal atau browser menunjukkan n8n sedang berjalan. |
 | 5 | `p1-ngrok-running.png` | Terminal menunjukkan Ngrok berjalan dan menampilkan URL publik. |
 | 6 | `p1-node-installed.png` | Bukti `node -v` & `npm -v` — Node.js & npm terinstal. |
-| 7 | `p1-vscode-installed.png` | Terminal menunjukkan Ngrok berjalan dan menampilkan URL publik. |
+| 7 | `p1-vscode-installed.png` | Tampilan VSCode dengan ekstensi pendukung terinstal. |
 
 📁 **Lihat seluruh screenshot:** 👉 [screenshots/](screenshots/)
 
@@ -82,7 +98,7 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 ```text
 RAG-Project/
 │
-├── webapp/                   # Frontend WebApp
+├── webapp/                   # Frontend WebApp (Hosted on Vercel)
 │   ├── image/
 │   ├── index.html
 │   ├── style.css
