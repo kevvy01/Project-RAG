@@ -246,20 +246,51 @@ body::after {
 .btn-delete-confirm { background-color: #d32f2f; color: white; }
 .btn-delete-confirm:hover { background-color: #b71c1c; }
 
-/* --- Tampilan Khusus Mobile (HP) --- */
-@media screen and (max-width: 600px) {
-    
-    /* Agar kotak chat memenuhi layar HP */
-    .chat-container {
-        width: 100%;
-        height: 100vh; /* Tinggi 100% layar */
-        border-radius: 0; /* Hilangkan lengkungan sudut */
-        margin: 0;
+/* =======================================================
+   RESPONSIVE MOBILE (Layar HP) - UPDATED VERSION
+   Paste kode ini di baris paling bawah style.css
+   ======================================================= */
+@media screen and (max-width: 768px) {
+
+    /* 1. Atur Wadah Utama agar Full Layar HP */
+    .card {
+        flex-direction: column; /* Ubah susunan jadi tumpuk */
+        width: 100vw;           /* Lebar 100% viewport */
+        height: 100vh;          /* Tinggi 100% viewport */
+        border-radius: 0;       /* Hilangkan sudut bulat di HP */
+        overflow: hidden;       /* Cegah scroll ganda */
+        margin: 0;              /* Hapus margin pinggir */
     }
 
-    /* Agar tombol dan input lebih besar (enak dipencet jempol) */
-    input[type="text"], button {
-        padding: 15px;
-        font-size: 16px;
+    /* 2. Sidebar Jadi Menu "Melayang" (Drawer) yang Ramping */
+    .sidebar {
+        position: absolute;     /* Melayang di atas chat */
+        top: 0;
+        left: 0;
+        
+        /* --- UKURAN DIPERBAIKI --- */
+        width: 70%;             /* Lebar cuma 70% layar */
+        max-width: 280px;       /* Batas maksimal biar gak kegedean di Tablet */
+        /* ------------------------- */
+        
+        height: 100%;           /* Tinggi penuh */
+        z-index: 1000;          /* Pastikan di lapisan paling atas */
+        background-color: #000; /* Warna background (sesuaikan jika tema kamu abu-abu) */
+        box-shadow: 4px 0 15px rgba(0,0,0,0.5); /* Bayangan */
+        border-right: 1px solid #333;
+    }
+
+    /* 3. Area Chat Jadi Full Lebar */
+    .main-chat-area {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    /* 4. MUNCULKAN Tombol Menu (Hamburger) */
+    /* Menggunakan !important karena di HTML tertulis style="display: none" */
+    #openSidebarBtn {
+        display: flex !important; 
+        margin-right: 15px;
     }
 }
