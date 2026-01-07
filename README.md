@@ -1,7 +1,9 @@
-# Project RAG
+# Project RAG - AI Chatbot
 
-Repositori untuk project Retrieval Augmented Generation (RAG).
-Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumentasi progres pengembangan.
+> 🚀 **Live Demo:** [**Klik Disini untuk Mencoba Chatbot**](https://kevvy.vercel.app/)
+
+Repositori ini berisi dokumentasi lengkap pengembangan proyek **Retrieval Augmented Generation (RAG)** Chatbot.
+Mencakup setup infrastruktur (Docker & Cloudflare), orkestrasi workflow AI (n8n), integrasi Database Vektor (Pinecone), hingga deployment WebApp frontend.
 
 ---
 
@@ -11,108 +13,125 @@ Berisi setup infrastruktur (Docker), workflow otomatisasi (n8n), serta dokumenta
 - [x] **Progress 2 — Workflow Telegram Chatbot (Basic LLM)**
 - [x] **Progress 3 — WebApp Chatbot (Local & Vercel)**
 - [x] **Progress 4 — Embedding & Pinecone**
-- [x] **Progress 5 — Integrasi**
-- [x] **Progress 6 — Cloudflare & Security**
+- [x] **Progress 5 — Integrasi RAG (PDF Intelligence)**
+- [x] **Progress 6 — Cloudflare Tunnel & Security**
 
 ---
 
 ## 📸 Bukti & Dokumentasi
 
 ### Progress 6: Cloudflare Tunnel & Network Security
-*Migrasi infrastruktur dari Ngrok ke Cloudflare Tunnel (Zero Trust) untuk stabilitas koneksi, penggunaan domain kustom, serta peningkatan keamanan dengan Firewall (WAF).*
 
-| No | Screenshot | Deskripsi |
-| --- | --- | --- |
-| 1 | `p6-cloudflare-tunnel-healthy.png` | Dashboard Cloudflare Zero Trust menunjukkan Tunnel dalam status **Healthy** (Connected). |
-| 2 | `p6-cloudflare-waf-rules.png` | Konfigurasi Web Application Firewall (WAF) memblokir request selain GET, POST, & OPTIONS. |
-| 3 | `p6-dns-setup.png` | Pengaturan DNS Record untuk subdomain n8n dan WebApp (Vercel). |
-| 4 | `p6-webapp-mobile-responsive.png` | Tampilan WebApp yang kini responsif dan rapi saat diakses melalui perangkat mobile. |
+_Migrasi infrastruktur dari Ngrok ke Cloudflare Tunnel (Zero Trust) untuk stabilitas koneksi, penggunaan domain kustom (`.my.id`), serta peningkatan keamanan dengan Firewall (WAF)._
+
+| No  | Screenshot                         | Deskripsi                                                                                                            |
+| --- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| 1   | `p6-cloudflare-analytics.png`      | Laporan trafik yang menunjukkan request berhasil masuk melalui Cloudflare Network.                                   |
+| 2   | `p6-cloudflare-tunnel-healthy.png` | Dashboard Cloudflare Zero Trust menunjukkan Tunnel dalam status **Healthy** (Connected).                             |
+| 3   | `p6-cloudflare-waf-rules.png`      | Konfigurasi Web Application Firewall (WAF) memblokir request mencurigakan namun mengizinkan metode `OPTIONS` (CORS). |
+| 4   | `p6-dns-setup.png`                 | Pengaturan DNS Record bersih (CNAME) yang diarahkan otomatis oleh Tunnel.                                            |
+| 5   | `p6-routing-configuration.png`     | Konfigurasi Public Hostname untuk dua rute: `n8n` (Dashboard) dan `webhook` (API).                                   |
 
 > **Catatan Teknis:**
-> * **Infrastructure:** Menggantikan Ngrok dengan **Cloudflare Tunnel (`cloudflared`)** agar n8n dapat diakses publik tanpa membuka port router, menggunakan domain sendiri (`.my.id`).
-> * **Security:** Mengaktifkan **WAF** untuk mencegah serangan pada webhook dan mengizinkan metode `OPTIONS` untuk menangani CORS.
-> * **Frontend:** Update CSS (Media Queries) untuk mendukung tampilan responsif penuh pada layar smartphone.
+>
+> - **Infrastructure:** Menggantikan Ngrok dengan **Cloudflare Tunnel (`cloudflared`)** yang berjalan di dalam Docker Container. Akses publik kini menggunakan domain kustom dengan SSL otomatis.
+> - **Security:** Mengaktifkan **WAF (Web Application Firewall)** untuk melindungi endpoint webhook dari serangan bot.
+> - **Routing:** Memisahkan jalur akses dashboard (`n8n.kevvy.my.id`) dan jalur API (`webhook.kevvy.my.id`).
+
+---
 
 ### Progress 5: Integrasi Total (RAG Chatbot)
-*Menghubungkan Telegram Chatbot dengan database Pinecone sehingga AI menjawab berdasarkan dokumen referensi.*
 
-| No | Screenshot | Deskripsi |
-| --- | --- | --- |
-| 1 | `p5-n8n--integration-workflow.png` | Workflow final n8n (Telegram/webapp -> Q&A Chain -> Pinecone & Groq). |
-| 2 | `p5-telegram-integration-chat-success.png` | Bukti chatbot Telegram menjawab pertanyaan berdasarkan isi dokumen PDF. |
-| 3 | `p5-webapp-integration-chat-success` | Bukti WebApp menjawab pertanyaan berdasarkan isi dokumen PDF. |
+_Menghubungkan Telegram Chatbot dan WebApp dengan database Pinecone sehingga AI menjawab berdasarkan referensi dokumen._
 
-> **Catatan Teknis:** Menggunakan `Question and Answer Chain` untuk menggabungkan konteks dari Pinecone ke dalam prompt model Groq secara otomatis.
+| No  | Screenshot                                 | Deskripsi                                                                        |
+| --- | ------------------------------------------ | -------------------------------------------------------------------------------- |
+| 1   | `p5-n8n-integration-workflow.png`          | Workflow final n8n (Telegram/Web Trigger -> Q&A Chain -> Pinecone & Groq LLM).   |
+| 2   | `p5-telegram-integration-chat-success.png` | Bukti chatbot Telegram menjawab pertanyaan spesifik berdasarkan isi dokumen PDF. |
+| 3   | `p5-webapp-integration-chat-success.png`   | Bukti WebApp menjawab pertanyaan spesifik berdasarkan isi dokumen PDF.           |
+
+> **Catatan Teknis:** Menggunakan logika `Question and Answer Chain` untuk menggabungkan konteks vektor dari Pinecone ke dalam prompt sistem model Groq secara otomatis sebelum menjawab user.
+
+---
 
 ### Progress 4: Embedding & Pinecone (RAG Ingestion)
-*Implementasi pipeline untuk membaca dokumen (PDF), mengubahnya menjadi vector (Embedding), dan menyimpannya ke database Pinecone.*
 
-| No | Screenshot | Deskripsi |
-| --- | --- | --- |
-| 1 | `p4-n8n-embedding-output.png` | Output node Gemini di n8n yang menampilkan data teks telah diubah menjadi array vektor. |
-| 2 | `p4-n8n-rag-ingestion-workflow.png` | Workflow penuh: Google Drive → Text Splitter → Gemini Embedding → Pinecone. |
-| 3 | `p4-pinecone-dashboard.png` | **Bukti Utama:** Dashboard Pinecone menunjukkan *Record Count* bertambah (data berhasil masuk). |
+_Implementasi pipeline ETL (Extract, Transform, Load) untuk dokumen PDF ke Vector Database._
 
-> **Catatan Teknis:** Menggunakan **Google Gemini Embedding** (`models/embedding-004`) untuk konversi teks ke vektor 768 dimensi, dan **Pinecone** sebagai Vector Database. Dokumen sumber diambil otomatis dari Google Drive.
+| No  | Screenshot                          | Deskripsi                                                                                                 |
+| --- | ----------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| 1   | `p4-n8n-embedding-output.png`       | Output node Gemini di n8n menampilkan data teks yang telah dikonversi menjadi array vektor.               |
+| 2   | `p4-n8n-rag-ingestion-workflow.png` | Workflow Ingestion: Google Drive (Source) → Text Splitter → Gemini Embedding → Pinecone.                  |
+| 3   | `p4-pinecone-dashboard.png`         | **Bukti Utama:** Dashboard Pinecone menunjukkan _Record Count_ bertambah (data vektor berhasil disimpan). |
+
+> **Catatan Teknis:** Menggunakan **Google Gemini Embedding** (`models/embedding-004`) untuk konversi teks ke vektor 768 dimensi, dan **Pinecone** sebagai Vector Database Serverless.
+
+---
 
 ### Progress 3: WebApp Chatbot & Deployment
-*Implementasi antarmuka web sederhana (HTML/CSS/JS) yang terhubung ke n8n melalui Webhook dan di-deploy menggunakan Vercel.*
 
-| No | Screenshot | Deskripsi |
-| --- | --- | --- |
-| 1 | `p3-n8n-webhook-workflow.png` | Workflow n8n (Webhook Trigger → Open AI → Webhook Response). |
-| 2 | `p3-vercel-deployment.png` | Tampilan WebApp saat diakses melalui domain publik Vercel. |
-| 3 | `p3-webapp-chat-success.png` | Bukti WebApp berhasil mengirim pesan dan menerima balasan dari AI. |
+_Implementasi antarmuka web (Frontend) yang terhubung ke n8n melalui Webhook._
 
-> **Catatan Teknis:** Frontend dibangun menggunakan Vanilla JS dan di-hosting di Vercel. Backend logika berjalan di n8n lokal yang diekspos menggunakan Cloudflare Tunnel (sebelumnya Ngrok).
+**🔗 Link:** [Buka WebApp](https://LINK_VERCEL_ANDA_DISINI.vercel.app)
+
+| No  | Screenshot                    | Deskripsi                                                          |
+| --- | ----------------------------- | ------------------------------------------------------------------ |
+| 1   | `p3-n8n-webhook-workflow.png` | Workflow n8n (Webhook Trigger → AI Agent → Webhook Response).      |
+| 2   | `p3-vercel-deployment.png`    | Tampilan WebApp saat diakses melalui domain publik Vercel.         |
+| 3   | `p3-webapp-chat-success.png`  | Bukti WebApp berhasil mengirim pesan dan menerima balasan dari AI. |
+
+> **Catatan Teknis:** Frontend dibangun menggunakan Vanilla JS (Fetch API) dan di-hosting di Vercel. Backend logika berjalan di n8n lokal yang diekspos ke publik.
+
+---
 
 ### Progress 2: Workflow Telegram & Groq AI
-*Implementasi chatbot Telegram yang terhubung dengan Groq API melalui n8n.*
 
-| No | Screenshot | Deskripsi |
-| --- | --- | --- |
-| 1 | `p2-n8n-workflow-full.png` | Tampilan full workflow di n8n (Telegram Trigger → Open AI → Telegram Output). |
-| 2 | `p2-telegram-chat-success.png` | Bukti chatbot berhasil membalas pertanyaan di Telegram. |
+_Implementasi chatbot Telegram yang terhubung dengan Groq API (High-speed LLM)._
 
-> **Catatan Teknis:** Menggunakan model **Groq** sebagai alternatif OpenAI untuk pemrosesan bahasa (LLM) dikarenakan efisiensi dan ketersediaan akses API.
+| No  | Screenshot                     | Deskripsi                                                                     |
+| --- | ------------------------------ | ----------------------------------------------------------------------------- |
+| 1   | `p2-n8n-workflow-full.png`     | Tampilan full workflow di n8n (Telegram Trigger → Groq AI → Telegram Output). |
+| 2   | `p2-telegram-chat-success.png` | Bukti chatbot berhasil membalas pertanyaan user di Telegram.                  |
+
+> **Catatan Teknis:** Menggunakan model **Groq (Llama 3)** sebagai alternatif OpenAI untuk inferensi yang jauh lebih cepat dan efisien.
+
+---
 
 ### Progress 1: Setup Infrastruktur Dasar
-*Instalasi tools wajib: Docker, Node.js, Git, n8n.*
 
-| No | Screenshot | Deskripsi |
-| --- | --- | --- |
-| 1 | `p1-docker-compose-installed.png` | Bukti `docker compose version` berhasil — Docker Compose aktif. |
-| 2 | `p1-docker-installed.png` | Bukti perintah `docker --version` berhasil — Docker terinstal. |
-| 3 | `p1-git-installed.png` | Bukti `git --version` — Git terinstal. |
-| 4 | `p1-n8n-running.png` | Tampilan terminal atau browser menunjukkan n8n sedang berjalan. |
-| 5 | `p1-ngrok-running.png` | Terminal menunjukkan Ngrok berjalan dan menampilkan URL publik. |
-| 6 | `p1-node-installed.png` | Bukti `node -v` & `npm -v` — Node.js & npm terinstal. |
-| 7 | `p1-vscode-installed.png` | Tampilan VSCode dengan ekstensi pendukung terinstal. |
+_Instalasi tools development environment._
+
+| No  | Screenshot                        | Deskripsi                                                              |
+| --- | --------------------------------- | ---------------------------------------------------------------------- |
+| 1   | `p1-docker-compose-installed.png` | Bukti `docker compose version` berhasil.                               |
+| 2   | `p1-n8n-running.png`              | Tampilan browser menunjukkan dashboard n8n berjalan di localhost:5678. |
+| 3   | `p1-environment-check.png`        | Bukti Node.js, Git, dan Docker terinstal dengan benar.                 |
 
 📁 **Lihat seluruh screenshot:** 👉 [screenshots/](screenshots/)
 
 ---
 
-## 📁 Struktur Folder
+## 📁 Struktur Folder Project
 
 ```text
 RAG-Project/
 │
+├── cloudflare/               # [NEW] Konfigurasi Tunnel & Laporan Keamanan
+│   ├── docker-compose.yaml   # Config Cloudflared Tunnel
+│   └── screenshots/          # Bukti DNS, WAF, & Tunnel Health
+│
 ├── webapp/                   # Frontend WebApp (Hosted on Vercel)
-│   ├── image/
 │   ├── index.html
 │   ├── style.css
-│   └── script.js
+│   └── script.js             # Fetch API ke endpoint Cloudflare
 │
-├── workflows/                # Berisi file workflow n8n (.json)
-│   ├── workflow-1-telegram.json
-│   ├── workflow-2-webapp.json
-│   ├── workflow-3-embedding.json
-│   └── workflow-4-integration.json
+├── workflows/                # Backup Workflow n8n (.json)
+│   ├── workflow-telegram.json
+│   ├── workflow-rag-ingestion.json
+│   └── workflow-chat-integration.json
 │
-├── docs/                     # Dokumentasi dan laporan (.pdf / .docx)
+├── screenshots/              # Kumpulan bukti screenshot progress 1-6
 │
-├── screenshots/              # Bukti screenshot progress (png/jpg)
-│
-├── docker-compose.yaml       # Konfigurasi infrastruktur n8n
-└── README.md                 # File ini
+├── docker-compose.yaml       # Orchestrator utama (n8n & cloudflared)
+└── README.md                 # Dokumentasi Project ini
+```
