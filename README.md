@@ -126,9 +126,10 @@ RAG-Project/
 │   └── script.js             # Fetch API ke endpoint Cloudflare
 │
 ├── workflows/                # Backup Workflow n8n (.json)
-│   ├── workflow-telegram.json
-│   ├── workflow-rag-ingestion.json
-│   └── workflow-chat-integration.json
+│   ├── workflow-1=telegram.json
+│   ├── workflow-2-webapp.json
+│   ├── workflow-3-embedding.json
+│   └── workflow-4-integration.json
 │
 ├── screenshots/              # Kumpulan bukti screenshot progress 1-6
 │
