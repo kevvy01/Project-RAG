@@ -72,7 +72,7 @@ _Implementasi pipeline ETL (Extract, Transform, Load) untuk dokumen PDF ke Vecto
 
 _Implementasi antarmuka web (Frontend) yang terhubung ke n8n melalui Webhook._
 
-**🔗 Link:** [Buka WebApp](https://LINK_VERCEL_ANDA_DISINI.vercel.app)
+**🔗 Link:** [Buka WebApp](https://kevvy.vercel.app/)
 
 | No  | Screenshot                    | Deskripsi                                                          |
 | --- | ----------------------------- | ------------------------------------------------------------------ |
