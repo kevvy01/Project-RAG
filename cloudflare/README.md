@@ -7,7 +7,3 @@ Setup ini menggunakan Docker Compose untuk menjalankan n8n dan Cloudflared Tunne
 - Domain: kevvy.my.id
 - Status Tunnel: Healthy
 - WAF: Active
-
-## Bukti Screenshot
-
-(Lihat file gambar di folder ini)
