@@ -1,7 +1,10 @@
 const express = require("express");
 const axios = require("axios");
 const path = require("path");
+const cors = require("cors"); // 1. Tambahkan ini
 const app = express();
+
+app.use(cors()); // 2. Izinkan semua domain (Vercel) mengakses Node.js kamu
 
 app.use(express.json());
 
