@@ -33,7 +33,6 @@ services:
     container_name: cloudflared-tunnel
     restart: always
     network_mode: "host"
-    # Gunakan token asli kamu yang dari dashboard Cloudflare Zero Trust
     command: tunnel run --token eyJhIjoiOTE4NGExNTI5NGFkZmY5NzJjY2U1OWMxZTNlMGE4ZDMiLCJ0IjoiNDJkODc2YjktZTk3MC00NmM1LWJjNGEtY2NjYWJjNTM4OWE5IiwicyI6Ik5XRmtPR0U1Tm1RdE5tUmxaUzAwWldRMUxUZ3daV010TTJSaU5qRm1NV001TlRreCJ9
 
 volumes:
