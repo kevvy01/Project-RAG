@@ -24,19 +24,19 @@ Mencakup setup infrastruktur (Docker & Cloudflare), orkestrasi workflow AI (n8n)
 
 _Migrasi infrastruktur dari Ngrok ke Cloudflare Tunnel (Zero Trust) untuk stabilitas koneksi, penggunaan domain kustom (`.my.id`), serta peningkatan keamanan dengan Firewall (WAF)._
 
-| No  | Screenshot                         | Deskripsi                                                                                                            |
-| --- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
-| 1   | `p6-cloudflare-analytics.png`      | Laporan trafik yang menunjukkan request berhasil masuk melalui Cloudflare Network.                                   |
-| 2   | `p6-cloudflare-tunnel-healthy.png` | Dashboard Cloudflare Zero Trust menunjukkan Tunnel dalam status **Healthy** (Connected).                             |
-| 3   | `p6-cloudflare-waf-rules.png`      | Konfigurasi Web Application Firewall (WAF) memblokir request mencurigakan namun mengizinkan metode `OPTIONS` (CORS). |
-| 4   | `p6-dns-setup.png`                 | Pengaturan DNS Record bersih (CNAME) yang diarahkan otomatis oleh Tunnel.                                            |
-| 5   | `p6-routing-configuration.png`     | Konfigurasi Public Hostname untuk dua rute: `n8n` (Dashboard) dan `webhook` (API).                                   |
+| No  | Screenshot                         | Deskripsi                                                                                           |
+| --- | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
+| 1   | `p6-cloudflare-analytics.png`      | Laporan trafik yang menunjukkan filter keamanan bekerja pada jaringan Cloudflare.                   |
+| 2   | `p6-cloudflare-tunnel-healthy.png` | Dashboard Zero Trust menunjukkan Tunnel aktif menghubungkan port `3000` (Node.js) dan `5678` (n8n). |
+| 3   | `p6-cloudflare-waf-rules.png`      | **Bukti Keamanan:** Konfigurasi WAF untuk Method Filtering dan Trusted Origin Validation.           |
+| 4   | `p6-routing-configuration.png`     | Konfigurasi Public Hostname: `n8n.kevvy.my.id` (Admin) dan `chat.kevvy.my.id` (User Access).        |
+| 5   | `p6-waf-block-evidence.png`        | Bukti sistem memblokir akses langsung (unauthorized) ke API chat sesuai aturan firewall.            |
 
-> **Catatan Teknis:**
+> **Catatan Teknis Keamanan:**
 >
-> - **Infrastructure:** Menggantikan Ngrok dengan **Cloudflare Tunnel (`cloudflared`)** yang berjalan di dalam Docker Container. Akses publik kini menggunakan domain kustom dengan SSL otomatis.
-> - **Security:** Mengaktifkan **WAF (Web Application Firewall)** untuk melindungi endpoint webhook dari serangan bot.
-> - **Routing:** Memisahkan jalur akses dashboard (`n8n.kevvy.my.id`) dan jalur API (`webhook.kevvy.my.id`).
+> - **Infrastruktur:** Menggantikan Ngrok dengan **Cloudflare Tunnel (`cloudflared`)** dalam Docker untuk koneksi terenkripsi tanpa ekspos port publik secara terbuka.
+> - **Secure Proxy:** Menggunakan Node.js Express sebagai layer perantara untuk menyembunyikan endpoint webhook n8n yang asli.
+> - **Whitelisted Origins:** Menerapkan **Referer Validation** pada WAF; hanya permintaan dari domain resmi (Vercel & Chat Domain) yang diizinkan.
 
 ---
 
@@ -104,8 +104,15 @@ _Instalasi tools development environment._
 | No  | Screenshot                        | Deskripsi                                                              |
 | --- | --------------------------------- | ---------------------------------------------------------------------- |
 | 1   | `p1-docker-compose-installed.png` | Bukti `docker compose version` berhasil.                               |
-| 2   | `p1-n8n-running.png`              | Tampilan browser menunjukkan dashboard n8n berjalan di localhost:5678. |
-| 3   | `p1-environment-check.png`        | Bukti Node.js, Git, dan Docker terinstal dengan benar.                 |
+| 2   | `p1-docker-environment-final.png` | Bukti semua "mesin" berjalan di latar belakang.                        |
+| 3   | `p1-docker-installed.png`         | Bukti `docker --version` berhasil.                                     |
+| 4   | `p1-git-installed.png`            | Bukti git berhasil di unduh                                            |
+| 5   | `p1-n8n-running.png`              | Tampilan browser menunjukkan dashboard n8n berjalan di localhost:5678. |
+| 6   | `p1-ngrok-running.png`            | Bukti ngrok berjalan                                                   |
+| 7   | `p1-node-installed.png`           | Bukti node.js berhasil di unduh                                        |
+| 5   | `p1-vscode-intalled.png`          | Bukti vs code berhasil di unduh                                        |
+
+---
 
 📁 **Lihat seluruh screenshot:** 👉 [screenshots/](screenshots/)
 
@@ -114,25 +121,25 @@ _Instalasi tools development environment._
 ## 📁 Struktur Folder Project
 
 ```text
-RAG-Project/
+Project-RAG/
 │
-├── cloudflare/               # [NEW] Konfigurasi Tunnel & Laporan Keamanan
-│   ├── docker-compose.yaml   # Config Cloudflared Tunnel
-│   └── screenshots/          # Bukti DNS, WAF, & Tunnel Health
+├── cloudflare/               # [NEW] Konfigurasi Tunnel & Keamanan
+│   ├── tunnel-config.yaml    # Ingress routing n8n & webapp
+│   └── firewall-rules.md     # Penjelasan teknis 2 Rule WAF
 │
-├── webapp/                   # Frontend WebApp (Hosted on Vercel)
-│   ├── index.html
-│   ├── style.css
-│   └── script.js             # Fetch API ke endpoint Cloudflare
+├── webapp/                   # Backend Proxy & Frontend
+│   ├── server.js             # Express Proxy Server (Port 3000)
+│   ├── Dockerfile            # Image build untuk webapp
+│   └── public/               # Frontend (HTML, CSS, JS)
 │
 ├── workflows/                # Backup Workflow n8n (.json)
-│   ├── workflow-1=telegram.json
-│   ├── workflow-2-webapp.json
-│   ├── workflow-3-embedding.json
-│   └── workflow-4-integration.json
+│   ├── workflow-1-telegram.json
+│   ├── workflow-2-webapp-rag.json
+│   |── workflow-3-embedding.json
+|   └── workflow-4-integration.json
 │
 ├── screenshots/              # Kumpulan bukti screenshot progress 1-6
 │
-├── docker-compose.yaml       # Orchestrator utama (n8n & cloudflared)
+├── docker-compose.yaml       # Orchestrator (n8n, webapp, cloudflared)
 └── README.md                 # Dokumentasi Project ini
 ```

@@ -1,0 +1,17 @@
+# Cloudflare Tunnel Configuration Documentation
+# Arsitektur: Cloudflare Tunnel -> Docker Container
+
+tunnel: project-rag-tunnel # Nama tunnel sesuai di dashboard
+credentials-file: /home/nonroot/.cloudflared/tunnel-id.json
+
+ingress:
+  # Routing untuk Dashboard n8n
+  - hostname: n8n.kevvy.my.id
+    service: http://localhost:5678
+
+  # Routing untuk WebApp Node.js (Proxy Secure)
+  - hostname: chat.kevvy.my.id
+    service: http://localhost:3000
+
+  # Default rule jika hostname tidak cocok (404)
+  - service: http_status:404
