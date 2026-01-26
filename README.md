@@ -32,7 +32,7 @@ _Migrasi infrastruktur dari Ngrok ke Cloudflare Tunnel (Zero Trust) untuk stabil
 | 4   | `p6-routing-configuration.png`     | Konfigurasi Public Hostname: `n8n.kevvy.my.id` (Admin) dan `chat.kevvy.my.id` (User Access).        |
 | 5   | `p6-waf-block-evidence.png`        | Bukti sistem memblokir akses langsung (unauthorized) ke API chat sesuai aturan firewall.            |
 
-> **Catatan Teknis Keamanan:**
+> **Catatan Teknis :**
 >
 > - **Infrastruktur:** Menggantikan Ngrok dengan **Cloudflare Tunnel (`cloudflared`)** dalam Docker untuk koneksi terenkripsi tanpa ekspos port publik secara terbuka.
 > - **Secure Proxy:** Menggunakan Node.js Express sebagai layer perantara untuk menyembunyikan endpoint webhook n8n yang asli.
